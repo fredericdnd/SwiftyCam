@@ -1050,8 +1050,55 @@ extension SwiftyCamViewController : AVCaptureFileOutputRecordingDelegate {
         } else {
             //Call delegate function with the URL of the outputfile
             DispatchQueue.main.async {
-                self.cameraDelegate?.swiftyCam(self, didFinishProcessVideoAt: outputFileURL)
+                guard let data = NSData(contentsOf: outputFileURL as URL) else {
+                    return
+                }
+                
+                print("File size before compression: \(Double(data.length / 1048576)) mb")
+                let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".m4v")
+                self.compressVideo(inputURL: outputFileURL as URL, outputURL: compressedURL) { (exportSession) in
+                    guard let session = exportSession else {
+                        return
+                    }
+                    
+                    switch session.status {
+                    case .unknown:
+                        break
+                    case .waiting:
+                        break
+                    case .exporting:
+                        break
+                    case .completed:
+                        self.cameraDelegate?.swiftyCam(self, didFinishProcessVideoAt: compressedURL)
+                        
+                        guard let compressedData = NSData(contentsOf: compressedURL) else {
+                            return
+                        }
+                        
+                        print("File size after compression: \(Double(compressedData.length / 1048576)) mb")
+                    case .failed:
+                        break
+                    case .cancelled:
+                        break
+                    }
+                }
             }
+        }
+    }
+    
+    func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
+        let urlAsset = AVURLAsset(url: inputURL, options: nil)
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPreset1280x720) else {
+            handler(nil)
+            
+            return
+        }
+        
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = AVFileType.mov
+        exportSession.shouldOptimizeForNetworkUse = true
+        exportSession.exportAsynchronously { () -> Void in
+            handler(exportSession)
         }
     }
 }
