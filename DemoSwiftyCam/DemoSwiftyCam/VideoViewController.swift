@@ -13,30 +13,23 @@
  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+// MARK: IMPORT STATEMENTS
 import UIKit
 import AVFoundation
 import AVKit
 
+// MARK: VIDEO VIEW CONTROLLER - CLASS
 class VideoViewController: UIViewController {
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    // MARK: PROPERTIES
+    public var videoURL: URL!
     
-    private var videoURL: URL
     var player: AVPlayer?
     var playerController : AVPlayerViewController?
     
-    init(videoURL: URL) {
-        self.videoURL = videoURL
-        super.init(nibName: nil, bundle: nil)
-    }
+    @IBOutlet weak var closeButton: UIButton!
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-
+    // MARK: VIEW DID LOAD - FUNCTION
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.gray
@@ -53,26 +46,35 @@ class VideoViewController: UIViewController {
         self.view.addSubview(playerController!.view)
         playerController!.view.frame = view.frame
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player!.currentItem)
-        
-        let cancelButton = UIButton(frame: CGRect(x: 10.0, y: 10.0, width: 30.0, height: 30.0))
-        cancelButton.setImage(#imageLiteral(resourceName: "cancel"), for: UIControlState())
-        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-        view.addSubview(cancelButton)
+   
+        closeButton.setImage(#imageLiteral(resourceName: "closeButton"), for: .normal)
+        closeButton.setImage(#imageLiteral(resourceName: "closeButton"), for: .highlighted)
+        closeButton.addAnimations()
+        self.view.bringSubview(toFront: closeButton)
     }
     
+    // MARK: DISMISS - FUNCTION
+    @IBAction func dismiss(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: VIEW DID APPEAR - FUNCTION
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         player?.play()
     }
     
-    func cancel() {
-        dismiss(animated: true, completion: nil)
-    }
-    
+    // MARK: PLAY ITEM DID REACH END - FUNCTION
     @objc fileprivate func playerItemDidReachEnd(_ notification: Notification) {
         if self.player != nil {
             self.player!.seek(to: kCMTimeZero)
             self.player!.play()
         }
     }
+    
+    // MARK: PREFERRED STATUS BAR STYLE - VARIABLE
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }

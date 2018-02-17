@@ -35,7 +35,7 @@ class SwiftyRecordButton: SwiftyCamButton {
         
        circleBorder = CALayer()
         circleBorder.backgroundColor = UIColor.clear.cgColor
-        circleBorder.borderWidth = 6.0
+        circleBorder.borderWidth = 5.0
         circleBorder.borderColor = UIColor.white.cgColor
         circleBorder.bounds = self.bounds
         circleBorder.position = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
@@ -54,8 +54,8 @@ class SwiftyRecordButton: SwiftyCamButton {
         
         UIView.animate(withDuration: 0.6, delay: 0.0, options: .curveEaseOut, animations: {
             self.innerCircle.transform = CGAffineTransform(scaleX: 62.4, y: 62.4)
-            self.circleBorder.setAffineTransform(CGAffineTransform(scaleX: 1.352, y: 1.352))
-            self.circleBorder.borderWidth = (6 / 1.352)
+            self.circleBorder.setAffineTransform(CGAffineTransform(scaleX: 1.2, y: 1.2))
+            self.circleBorder.borderWidth = (5 / 1.2)
 
         }, completion: nil)
     }

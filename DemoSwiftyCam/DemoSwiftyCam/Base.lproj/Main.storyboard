@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,44 +22,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hke-fJ-4fX" customClass="SwiftyRecordButton" customModule="DemoSwiftyCam" customModuleProvider="target">
-                                <rect key="frame" x="150" y="572" width="75" height="75"/>
+                                <rect key="frame" x="152.5" y="567" width="70" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="8Mb-dy-Ned"/>
-                                    <constraint firstAttribute="width" constant="75" id="YVv-UJ-n1R"/>
+                                    <constraint firstAttribute="height" constant="70" id="8Mb-dy-Ned"/>
+                                    <constraint firstAttribute="width" constant="70" id="YVv-UJ-n1R"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hS2-sy-kuv">
-                                <rect key="frame" x="70" y="598" width="30" height="23"/>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hS2-sy-kuv">
+                                <rect key="frame" x="72.5" y="567" width="40" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="seT-qe-l2J"/>
+                                </constraints>
                                 <state key="normal" image="flipCamera"/>
                                 <connections>
                                     <action selector="cameraSwitchTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Du6-FK-hjA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stR-Rn-UdV">
-                                <rect key="frame" x="275" y="594" width="18" height="30"/>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stR-Rn-UdV">
+                                <rect key="frame" x="262.5" y="566.5" width="40" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="8dD-oU-QV8"/>
-                                    <constraint firstAttribute="width" constant="18" id="rLN-FU-RYb"/>
+                                    <constraint firstAttribute="width" constant="40" id="aVe-af-7uL"/>
                                 </constraints>
-                                <state key="normal" image="flashOutline"/>
+                                <state key="normal" image="flashOff"/>
                                 <connections>
                                     <action selector="toggleFlashTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C5u-0g-Kim"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3b-yB-19d">
+                                <rect key="frame" x="15" y="40" width="21" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="21" id="3iR-G4-bg3"/>
+                                    <constraint firstAttribute="height" constant="21" id="JC3-bb-wee"/>
+                                </constraints>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UwY-tq-Yzp"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="hke-fJ-4fX" secondAttribute="bottom" constant="20" symbolic="YES" id="0OM-Pc-Ze1"/>
+                            <constraint firstAttribute="bottom" secondItem="hke-fJ-4fX" secondAttribute="bottom" constant="30" id="0OM-Pc-Ze1"/>
                             <constraint firstItem="hke-fJ-4fX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="22M-gB-uKl"/>
-                            <constraint firstItem="stR-Rn-UdV" firstAttribute="leading" secondItem="hke-fJ-4fX" secondAttribute="trailing" constant="50" id="4S2-fF-Ta9"/>
+                            <constraint firstItem="stR-Rn-UdV" firstAttribute="leading" secondItem="hke-fJ-4fX" secondAttribute="trailing" constant="40" id="4S2-fF-Ta9"/>
                             <constraint firstItem="hS2-sy-kuv" firstAttribute="centerY" secondItem="hke-fJ-4fX" secondAttribute="centerY" id="AuI-5x-aKM"/>
-                            <constraint firstItem="hke-fJ-4fX" firstAttribute="leading" secondItem="hS2-sy-kuv" secondAttribute="trailing" constant="50" id="fY6-aF-vVL"/>
+                            <constraint firstItem="stR-Rn-UdV" firstAttribute="height" secondItem="hke-fJ-4fX" secondAttribute="height" id="Dhe-tO-szZ"/>
+                            <constraint firstItem="hS2-sy-kuv" firstAttribute="height" secondItem="hke-fJ-4fX" secondAttribute="height" id="Nyg-of-zON"/>
+                            <constraint firstItem="I3b-yB-19d" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="UoT-NP-HjM"/>
+                            <constraint firstItem="I3b-yB-19d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="XWG-Ir-YhK"/>
+                            <constraint firstItem="hke-fJ-4fX" firstAttribute="leading" secondItem="hS2-sy-kuv" secondAttribute="trailing" constant="40" id="fY6-aF-vVL"/>
                             <constraint firstItem="stR-Rn-UdV" firstAttribute="centerY" secondItem="hke-fJ-4fX" secondAttribute="centerY" id="sJP-2Z-GAn"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="captureButton" destination="hke-fJ-4fX" id="nng-T2-6kL"/>
+                        <outlet property="closeButton" destination="I3b-yB-19d" id="zwm-JM-Bdm"/>
                         <outlet property="flashButton" destination="stR-Rn-UdV" id="WAJ-Ik-VF7"/>
                         <outlet property="flipCameraButton" destination="hS2-sy-kuv" id="lWF-Wl-Vg1"/>
                     </connections>
@@ -67,9 +85,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="FzO-Fz-HdT">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qxx-SL-O9Q" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="PhotoViewController" id="pen-9M-LiI" customClass="PhotoViewController" customModule="DemoSwiftyCam" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="61j-wM-gGd"/>
+                        <viewControllerLayoutGuide type="bottom" id="QZt-Fr-QlW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FrL-fh-ZzK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="znv-Kr-DDS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMO-Br-QWx">
+                                <rect key="frame" x="15" y="40" width="21" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="21" id="7rb-Uf-BOH"/>
+                                    <constraint firstAttribute="height" constant="21" id="wR5-2O-6sd"/>
+                                </constraints>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="pen-9M-LiI" eventType="touchUpInside" id="pvr-w0-e7j"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="znv-Kr-DDS" secondAttribute="trailing" id="1Xf-hX-vRs"/>
+                            <constraint firstItem="dMO-Br-QWx" firstAttribute="leading" secondItem="FrL-fh-ZzK" secondAttribute="leading" constant="15" id="2ej-t8-0GQ"/>
+                            <constraint firstItem="dMO-Br-QWx" firstAttribute="top" secondItem="61j-wM-gGd" secondAttribute="bottom" constant="20" id="8rJ-1F-qxo"/>
+                            <constraint firstItem="znv-Kr-DDS" firstAttribute="leading" secondItem="FrL-fh-ZzK" secondAttribute="leading" id="J7O-Ev-HN9"/>
+                            <constraint firstAttribute="bottom" secondItem="znv-Kr-DDS" secondAttribute="bottom" id="KAV-Dx-Hd0"/>
+                            <constraint firstItem="znv-Kr-DDS" firstAttribute="top" secondItem="FrL-fh-ZzK" secondAttribute="top" id="nic-3m-aEU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="znv-Kr-DDS" id="8FR-5Z-p9K"/>
+                        <outlet property="closeButton" destination="dMO-Br-QWx" id="B8l-mE-8W6"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1317.5999999999999" y="33.733133433283363"/>
+        </scene>
+        <!--Video View Controller-->
+        <scene sceneID="Ooc-r0-EWA">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ruf-vR-73k" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="VideoViewController" id="HKS-l3-Hr6" customClass="VideoViewController" customModule="DemoSwiftyCam" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5R0-Dz-ZbK"/>
+                        <viewControllerLayoutGuide type="bottom" id="UEy-lg-9P8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ecg-wx-BWT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUB-cW-Wkc">
+                                <rect key="frame" x="15" y="40" width="21" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="21" id="DN4-yS-3M6"/>
+                                    <constraint firstAttribute="height" constant="21" id="QYm-1Z-JOW"/>
+                                </constraints>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="HKS-l3-Hr6" eventType="touchUpInside" id="Rrr-kg-PDW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OUB-cW-Wkc" firstAttribute="top" secondItem="5R0-Dz-ZbK" secondAttribute="bottom" constant="20" id="Eue-he-qkQ"/>
+                            <constraint firstItem="OUB-cW-Wkc" firstAttribute="leading" secondItem="Ecg-wx-BWT" secondAttribute="leading" constant="15" id="FpL-KE-PWY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="OUB-cW-Wkc" id="Bqx-7K-rB4"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1958" y="34"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="flashOutline" width="18" height="30"/>
-        <image name="flipCamera" width="30" height="23"/>
+        <image name="closeButton" width="19" height="19"/>
+        <image name="flashOff" width="14" height="22"/>
+        <image name="flipCamera" width="24" height="20"/>
     </resources>
 </document>
