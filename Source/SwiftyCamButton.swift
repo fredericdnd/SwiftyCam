@@ -123,6 +123,7 @@ open class SwiftyCamButton: UIButton {
     fileprivate func createGestureRecognizers() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SwiftyCamButton.Tap))
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(SwiftyCamButton.LongPress))
+        longGesture.minimumPressDuration = 0.15
         self.addGestureRecognizer(tapGesture)
         self.addGestureRecognizer(longGesture)
     }
