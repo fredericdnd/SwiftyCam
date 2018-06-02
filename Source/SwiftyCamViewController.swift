@@ -376,7 +376,9 @@ open class SwiftyCamViewController: UIViewController {
             case .notAuthorized:
                 // Prompt to App Settings
                 if let promptCustomPrivacyAlert = self.promptCustomPrivacyAlert {
-                    promptCustomPrivacyAlert()
+                    DispatchQueue.main.async(execute: { [unowned self] in
+                        promptCustomPrivacyAlert()
+                    })
                 } else {
                     self.promptToAppSettings()
                 }
