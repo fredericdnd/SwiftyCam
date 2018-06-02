@@ -158,6 +158,9 @@ open class SwiftyCamViewController: UIViewController {
     /// Setting to true will prompt user for access to microphone on View Controller launch.
     public var audioEnabled                   = true
     
+    /// Setting to true will prompt user for app settings to enable camera
+    public var promptPrivacyAlert             = true
+    
     /// Public access to Pinch Gesture
     fileprivate(set) public var pinchGesture  : UIPinchGestureRecognizer!
     
@@ -372,7 +375,9 @@ open class SwiftyCamViewController: UIViewController {
                 
             case .notAuthorized:
                 // Prompt to App Settings
-                self.promptToAppSettings()
+                if self.promptPrivacyAlert {
+                    self.promptToAppSettings()
+                }
             case .configurationFailed:
                 // Unknown Error
                 DispatchQueue.main.async(execute: { [unowned self] in

@@ -37,6 +37,7 @@ class ViewController: SwiftyCamViewController {
         audioEnabled = true
         flipCameraButton.addAnimations()
         flashButton.addAnimations()
+        promptPrivacyAlert = false
         
         flipCameraButton.setImage(#imageLiteral(resourceName: "flipCamera"), for: .normal)
         flipCameraButton.setImage(#imageLiteral(resourceName: "flipCamera"), for: .highlighted)
