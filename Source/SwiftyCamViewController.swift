@@ -260,7 +260,7 @@ open class SwiftyCamViewController: UIViewController {
         super.viewDidLoad()
         previewLayer = PreviewView(frame: view.frame, videoGravity: videoGravity)
         view.addSubview(previewLayer)
-        view.sendSubview(toBack: previewLayer)
+        view.sendSubviewToBack(previewLayer)
         
         // Add Gesture Recognizers
         
@@ -761,11 +761,11 @@ open class SwiftyCamViewController: UIViewController {
     
     fileprivate func subscribeToDeviceOrientationChangeNotifications() {
         self.deviceOrientation = UIDevice.current.orientation
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceDidRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceDidRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     fileprivate func unsubscribeFromDeviceOrientationChangeNotifications() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
         self.deviceOrientation = nil
     }
     
@@ -804,7 +804,7 @@ open class SwiftyCamViewController: UIViewController {
         }
     }
     
-    fileprivate func getImageOrientation(forCamera: CameraSelection) -> UIImageOrientation {
+    fileprivate func getImageOrientation(forCamera: CameraSelection) -> UIImage.Orientation {
         guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return forCamera == .rear ? .right : .leftMirrored }
         
         switch deviceOrientation {
@@ -872,9 +872,9 @@ open class SwiftyCamViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
             alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"), style: .default, handler: { action in
                 if #available(iOS 10.0, *) {
-                    UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+                    UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
                 } else {
-                    if let appSettings = URL(string: UIApplicationOpenSettingsURLString) {
+                    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.openURL(appSettings)
                     }
                 }
@@ -990,15 +990,19 @@ open class SwiftyCamViewController: UIViewController {
             return
         }
         
-        do{
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord,
-                                                            with: [.duckOthers, .defaultToSpeaker])
-            
+        if #available(iOS 10.0, *) {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.duckOthers, .defaultToSpeaker])
+                session.automaticallyConfiguresApplicationAudioSession = false
+            } catch {
+                print("[SwiftyCam]: Failed to set background audio preference")
+            }
+        } else {
+            let options: [AVAudioSession.CategoryOptions] = [.duckOthers, .defaultToSpeaker]
+            let category = AVAudioSession.Category.playAndRecord
+            let selector = NSSelectorFromString("setCategory:withOptions:error:")
+            AVAudioSession.sharedInstance().perform(selector, with: category, with: options)
             session.automaticallyConfiguresApplicationAudioSession = false
-        }
-        catch {
-            print("[SwiftyCam]: Failed to set background audio preference")
-            
         }
     }
 }
@@ -1045,9 +1049,9 @@ extension SwiftyCamViewController : AVCaptureFileOutputRecordingDelegate {
     
     public func fileOutput(_ captureOutput: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         if let currentBackgroundRecordingID = backgroundRecordingID {
-            backgroundRecordingID = UIBackgroundTaskInvalid
+            backgroundRecordingID = UIBackgroundTaskIdentifier.invalid
             
-            if currentBackgroundRecordingID != UIBackgroundTaskInvalid {
+            if currentBackgroundRecordingID != UIBackgroundTaskIdentifier.invalid {
                 UIApplication.shared.endBackgroundTask(currentBackgroundRecordingID)
             }
         }
